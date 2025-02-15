@@ -1,0 +1,92 @@
+Intro - Lecture N*1
+
+What is intelligence?
+- Ability to proccess information for future decision making
+
+Artificial Intelligence
+- Give the computer an hability to proccess information and inform future decision
+
+Machine Learning
+- Proccess data to make decisions
+
+Deep Learning 
+- Proccess raw data and extract patterns from data using neural networks
+- Move away from hand engineering features and learn patterns from raw datasets
+
+* The Perceptron
+The structural building block of deep learning
+A neural network is built of many perceptrons
+
+EQUASION
+
+y = g(w0 + XˆT * W)
+
+Dot product input vs weight + w0, into the non linear function, boom we get the output of a SINGLE perceptron/neuron
+
+input * weight + bias => nonlinear function => output
+
+Dot product => add the bias => apply non Liniearities => repeats for every single neuron => neuron will output a single number
+
+Non-Liniearities => So neural network can deal with non linear data
+
+each neurons has its owns weights
+
+Layer -> Collection of neurons
+Input Layer
+Hidden Layer 
+Output Layer
+
+z = w0 + dot product sum
+
+Empirical Loss = Measures the total loss over our entire dataset
+Cross Entropy Loss Function = Function that determines how bad of an answer it is
+Mean Squared error loss = can be used with regression models that output continuous real numbers
+
+**Training Neural Network**
+
+- We want to find the network weights that achieve the lowest loss
+
+* Loss Optimization
+
+See whats the direction where the weight is inscreasing, and goes on the opposite
+Gradient Descent: 
+Gradient tells us which way is up
+1. Iniatialize weight randomly in landscape
+2. Loop until convergence
+3. Compute gradient
+4. Update weight 
+
+Computing Gradients: BackPropagation
+propagates gradients from output to input, telling us if the loss on our NN goes up or down if we change this weight
+
+We should aim for better loss landscapes
+Learning rates not too small and not too large
+
+Learning rate numbers are what we will use to make our model do the steps toward the global minimum loss
+if we have a large learning rate, the model will diverge
+small learning rate we may never get to the global minimum
+find an in-between
+
+A lot of different algorithms to set the learning rate
+
+* Tips for training NN in practice and Batching Data
+
+Computing the gradient is too computionally intensive if we use all data points in the dataset
+What we do is take a mini batch of data and aproximate the gradient ( For example size 32 )
+
+* OverFitting
+
+We want the model to not ONLY do well on the training data, but do well on real world data
+
+Overfitting = is doing very well on training data but very badly on test data
+
+* Regularization
+So the model performs well on all datas, its not too specific and complex and not under fitting
+
+Tech 1 -> Drop out : During training randomly set some activations (neurons outputs) to 0
+
+So basically the NN is not going to rely on any one part of the feature of the dataset extensively
+The NN will learn various ways to achieve good accuracy 
+Typically drop 50%
+
+Tech 2 -> Early Stopping : Stop training before we have a chance to overfit
