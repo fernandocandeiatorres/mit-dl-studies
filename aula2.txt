@@ -1,0 +1,90 @@
+* Sequential Data
+
+Its a type of data
+
+* Sequence Modeling Applications
+
+One to One ( intro ) -> Binary
+One to Many
+Many to One
+Many to Many
+
+* Neurons With Recurrence
+
+ht = state of the model/computation/data so far ( kinda like a context to our data, or a past memory )
+
+yt = f(xt, ht-1)
+
+** Recurrent Neural Networks (RNNs) **
+
+3 Different Weights Matrices{
+    input weight (never changes) xh
+    state weight hh
+    output weight hy
+}
+
+Hidden state = with a non-lin function of state*stateweight + input*inputweight
+
+output = output height * state
+
+return output, hidden state
+
+Is a Layer
+
+Same weight matrices at every time step
+
+Each time step has a loss, sum of total losses accross all time steps -> total loss on the RNNs
+
+# Didnt quite understand the W
+
+BackProp -> goes back from the output to the input and update the weights to minimize the loss
+
+* BackProp for RNN
+Backpropagate accross the timesteps all the way to the beginning of the sequence  
+
+With backprop we have problems of exploding and vanishing gradients, because of the long term dependencies
+
+LONG SHORT TERM MEMORY (LSTMs) networks rely on a gated cell to track information throughout many time steps
+*LSTMs Key Concepts
+How info is updated within the recurrent unit?
+1. Maintain a cell state
+2. Use gates to control the flow of info {
+    Forget some, store some, dependendo da relevancia
+    Selectively update cell state
+    Output gate returns a filtered version of the cell state
+}
+3. Backprop through time with partially uninterrupted gradient flow
+
+* RNNs applications and Limitations
+Applications Examples: Music generations, sentiment classification, translation
+Limitations of RNNs:{
+Encoding bottleneck. 
+Slow, no parallelization ( because we need to look at it one by one ). 
+Not long memory
+}
+
+* Goal of Sequence Modeling: 
+Desired capabilities:
+- Continuous stream
+- Parallelization
+- Long memory
+
+Rather than thinking time step by time step in isolation
+Lets take a sequence for what it is
+Learn a NN model that can tells us what parts of that sequence are actually important to learn
+
+What is attention?
+Identify and extract most important features in an input
+
+We not going to do time step by time step because of the desired capabilities, but we need a way to know position and order
+1. Encode position information
+2. Take positional embedding and extract query, key, value for search
+3. Compute attention weighting (attention score: compute pairwise similarity between each query and key) -> gets the attention weight by seeing how close the vectors of query and key are to each other
+4. Extract features with high attention : attention weighting x value = output
+
+Overall goal
+Receive data all at once
+Encode Position
+Extract Key Query Value
+Compute similarity of query and key, scale and apply softmax to put it between (0,1) getting attention weights, multiply with the value and extract features
+relative to the input itself that have high attention scores
